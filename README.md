@@ -1,6 +1,6 @@
 # dotagents
 
-[APM](https://microsoft.github.io/apm/) plugin for [OhMyOpenCode (omo)](https://github.com/anomalyco/opencode) agent skills.
+[APM](https://microsoft.github.io/apm/) plugin for [oh-my-openagent (omo)](https://github.com/code-yeongyu/oh-my-openagent) skills.
 
 ## Skills
 
@@ -9,7 +9,7 @@
 | `git-commit` | Structured commit workflow with context gathering, message drafting, and hook handling |
 | `final-review` | Post-implementation review cycle with oracle agents and iterative feedback |
 
-> **Note:** These skills are designed exclusively for OhMyOpenCode (omo) and its agent system. They may not work correctly with other AI coding assistants.
+> **Note:** These skills are designed exclusively for oh-my-openagent (omo) and its agent system. They may not work correctly with other AI coding assistants.
 
 ## Usage
 
