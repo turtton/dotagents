@@ -72,7 +72,7 @@ Analyze the combined findings from all oracle agents:
 
 If any findings are classified as **decision-required**:
 
-- Present them to the user via the `question` tool (or via normal chat if `question` tool is unavailable).
+- Present them to the user. You may use the `question` tool for structured choices, or normal chat if you prefer.
 - Include context, the oracle's reasoning, and your own assessment for each finding.
 - Wait for the user's response before proceeding.
 
@@ -87,7 +87,7 @@ Apply all validated fixes, then run diagnostics:
 1. Apply each fix (directly or via delegated task).
 1. After **all** fixes in this cycle are applied, run `lsp_diagnostics` on all changed files. If `lsp_diagnostics` is unavailable for the file type, run project lint/format/type-check commands instead. If none are available, note this and proceed.
 1. Run build/test commands. Discover commands from: package.json scripts, Makefile, CI config, flake checks, or commands used earlier in the session. If none are discoverable, note "no project commands found; skipped."
-1. **If diagnostics, lint, build, or tests fail**: Treat each failure as a CRITICAL finding. Fix and re-run, or escalate to user as decision-required. Do NOT proceed to final confirmation with failing checks — record as "accepted risk" only if user explicitly approves.
+1. **If diagnostics, lint, build, or tests fail**: Treat each failure as a CRITICAL finding. Fix and re-run, or escalate to user as decision-required. Do NOT proceed with failing checks — record as "accepted risk" only if user explicitly approves.
 
 If no findings require fixes, explicitly state: "No issues found in Cycle N."
 
@@ -110,31 +110,9 @@ This report persists in the conversation and serves as the dismissed findings lo
 
 ______________________________________________________________________
 
-## After Both Baseline Cycles Complete
-
-### Final Confirmation (CRITICAL - MANDATORY question tool usage)
-
-**YOU MUST use the `question` tool** to ask the user whether the overall work is complete. This is a non-negotiable requirement.
-
-```typescript
-question(questions=[{
-  question: "Both review cycles complete. Summary:\n\n[summary of original work + all fixes from both cycles]\n\nShall I finalize this work?",
-  header: "Work completion",
-  options: [
-    { label: "Complete", description: "Work is done, no further changes needed" },
-    { label: "Needs more changes", description: "I have additional requests or modifications" }
-  ]
-}])
-```
-
-**If `question` tool is unavailable**, fallback to normal chat confirmation (but always prefer `question` tool).
-
-If the user selects "Needs more changes", address their feedback, then run **one additional review cycle** (Steps 1–4 + Cycle Report) before asking for confirmation again. Repeat until the user confirms completion.
-
 ## Rules
 
-- MUST run 2 baseline review cycles before the first final confirmation.
-- **MUST use `question` tool for final confirmation** (or normal chat if tool unavailable).
+- MUST run 2 baseline review cycles.
 - MUST fire oracle agents in parallel when using multiple oracles.
 - MUST scale oracle count to match change complexity.
 - MUST collect and wait for all oracle results before re-evaluation (unless agent failure handling applies).
@@ -145,5 +123,5 @@ If the user selects "Needs more changes", address their feedback, then run **one
 - MUST run `lsp_diagnostics` (or equivalent checks) after all fixes in each cycle.
 - MUST output a Cycle Report after each cycle to serve as dismissed findings log.
 - MUST reference prior Cycle Reports to avoid re-raising dismissed findings — but re-open if code changed, new evidence appears, or dismissal reason no longer applies.
-- MUST NOT proceed to final confirmation with failing diagnostics/build/tests — fix or escalate as accepted risk.
+- MUST NOT proceed with failing diagnostics/build/tests — fix or escalate as accepted risk.
 - If a cycle finds zero issues, still proceed to the next cycle (fresh perspective may catch different things).
