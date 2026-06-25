@@ -7,7 +7,7 @@
 | Skill | Description |
 |-------|-------------|
 | `git-commit` | Structured commit workflow with context gathering, message drafting, and hook handling |
-| `final-review` | Post-implementation review cycle with oracle agents and iterative feedback |
+| `missing-tools` | Missing tool use powerd by nix systems |
 
 > **Note:** These skills are designed exclusively for oh-my-openagent (omo) and its agent system. They may not work correctly with other AI coding assistants.
 
