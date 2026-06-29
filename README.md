@@ -6,8 +6,9 @@
 
 | Skill | Description |
 |-------|-------------|
+| `create-skill` | Interactive skill scaffolder — gathers requirements, generates SKILL.md, and auto-fixes via Oracle review |
 | `git-commit` | Structured commit workflow with context gathering, message drafting, and hook handling |
-| `missing-tools` | Missing tool use powerd by nix systems |
+| `missing-tools` | Missing tool use powered by nix systems |
 
 > **Note:** These skills are designed exclusively for oh-my-openagent (omo) and its agent system. They may not work correctly with other AI coding assistants.
 
