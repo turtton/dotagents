@@ -9,10 +9,13 @@
 | `create-skill` | **opencode 専用** | Interactive skill scaffolder — gathers requirements, generates SKILL.md, and auto-fixes via Oracle review |
 | `git-commit` | **汎用**(opencode 依存あり) | Structured commit workflow with context gathering, message drafting, and hook handling |
 | `missing-tools` | **汎用** | Missing tool use powered by nix systems |
+| `sandbox-extra` | **opencode 専用** | Resolves file-write/file-access failures under the opencode/senpi bwrap sandbox via `sandbox-extra.sh` mount configuration |
 
 ### 分類の詳細
 
 - **opencode 専用**: opencode / oh-my-openagent (omo) の機能(`task()` サブエージェント、Oracle、opencode 設定ディレクトリなど)に直接依存しており、他の AI コーディングアシスタントでは動作しません。
+  - `create-skill`: Oracle レビューや opencode 設定ディレクトリの検出など omo 固有の仕組みを使用します。
+  - `sandbox-extra`: opencode / senpi の bwrap サンドボックス固有の問題を解決するスキルのため、他環境では無意味です。
 - **汎用**: スキルの手順自体はエージェント非依存で、他環境でも流用可能です。
   - `git-commit`: コミット手順は汎用ですが、GUIDE.md を `~/.config/opencode/skill/git-commit/` の固定パスから読み込み、omo の `git-master` スキルとの併用を前提としているため、他環境で使うにはパス調整が必要です。
   - `missing-tools`: nix / direnv 環境が前提となるだけで、特定のエージェントには依存しません。
