@@ -15,15 +15,7 @@ Use this workflow when a command is unavailable in the current shell.
    direnv exec . <command>
    ```
 
-2. Use [comma](https://github.com/nix-community/comma) for tools from nixpkgs:
-
-   ```sh
-   , <command>
-   ```
-
-   When comma may fetch from GitHub, also use the `nix-github-rate-limit` skill.
-
-3. Use `nix run` when a specific nixpkgs package is needed:
+2. Use `nix run` for tools from nixpkgs:
 
    ```sh
    nix run nixpkgs#<package> -- <args>
@@ -31,7 +23,18 @@ Use this workflow when a command is unavailable in the current shell.
 
    When the command may fetch from GitHub, also use the `nix-github-rate-limit` skill.
 
-4. Use `nix shell` as the last resort:
+   If you don't know the package name, search with `nix-index`:
+
+   ```sh
+   # One-time database build:
+   nix-index
+
+   # Search for the command:
+   nix-locate <command>
+   # Then: nix run nixpkgs#<package> -- <args>
+   ```
+
+3. Use `nix shell` as the last resort:
 
    ```sh
    nix shell nixpkgs#<package> --command <command>
@@ -43,4 +46,4 @@ Use this workflow when a command is unavailable in the current shell.
 
 - Never install missing tools globally. Do not use commands such as `npm install -g`, `npm i -g`, `pnpm add -g`, `yarn global add`, `bun add -g`, `uv tool install`, `brew install`, or language-specific global installers to resolve a missing command.
 - Prefer `direnv exec .` first because project-local dev shells often already provide the right tool version and environment variables.
-- Comma automatically finds and runs the nixpkgs package containing the requested command.
+- `nix run` works without a TTY and doesn't require an interactive picker.
