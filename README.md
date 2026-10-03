@@ -10,6 +10,7 @@
 | `git-commit` | **汎用**(opencode 依存あり) | Structured commit workflow with context gathering, message drafting, and hook handling |
 | `missing-tools` | **汎用** | Missing tool use powered by nix systems |
 | `sandbox-extra` | **opencode 専用** | Resolves file-write/file-access failures under the opencode/senpi bwrap sandbox via `sandbox-extra.sh` mount configuration |
+| `worktree-pr` | **汎用** | Work in project-local worktrees, create a PR, and merge and clean up after user approval and CI success |
 
 ### 分類の詳細
 
@@ -19,6 +20,7 @@
 - **汎用**: スキルの手順自体はエージェント非依存で、他環境でも流用可能です。
   - `git-commit`: コミット手順は汎用ですが、GUIDE.md を `~/.config/opencode/skill/git-commit/` の固定パスから読み込み、omo の `git-master` スキルとの併用を前提としているため、他環境で使うにはパス調整が必要です。
   - `missing-tools`: nix / direnv 環境が前提となるだけで、特定のエージェントには依存しません。
+  - `worktree-pr`: Git とホスティングの CLI / API を使い、`.worktrees` 内での作業から PR 作成、許可後のマージと後片付けまで進めます。特定のエージェントや追加スキルには依存しません。
 
 > **Note:** These skills are designed primarily for oh-my-openagent (omo) and its agent system. See the classification above for portability.
 
