@@ -8,11 +8,11 @@ description: "MUST USE when a file-write or file-access failure occurs in a spec
 This skill resolves file-write and file-access failures caused by the opencode/senpi
 bwrap sandbox. The full procedure is in a separate file.
 
-**IMPORTANT**: Before proceeding, read the full guide using the Read tool:
-
-```
-Read file: ~/.config/opencode/skill/sandbox-extra/GUIDE.md
-```
+**IMPORTANT**: Before proceeding, read the full [GUIDE.md](GUIDE.md) using an
+available file-reading tool. Resolve this link relative to the loaded `SKILL.md`,
+not the working directory. If its location is unclear, check the absolute skill
+path supplied by the loader. If it remains unknown, explain that the guide cannot
+be located; do not guess a path belonging to another harness.
 
 Then follow the procedure described in GUIDE.md exactly.
 
