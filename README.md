@@ -6,7 +6,7 @@
 
 | Skill | 分類 | Description |
 |-------|------|-------------|
-| `create-skill` | **omo** | Interactive skill scaffolder — gathers requirements, generates SKILL.md, and auto-fixes via Oracle review |
+| `create-skill` | **omo** | Skill scaffolder for OpenCode / Senpi — gathers requirements, generates SKILL.md, and fixes issues through an available reviewer |
 | `git-commit` | **omo** | Structured commit workflow with context gathering, message drafting, and hook handling |
 | `missing-tools` | **generic** | Missing tool use powered by nix systems |
 | `sandbox-extra` | **omo** | Resolves file-write/file-access failures under the opencode/senpi bwrap sandbox via `sandbox-extra.sh` mount configuration |
@@ -14,10 +14,10 @@
 
 ### 分類の詳細
 
-- **omo**: oh-my-openagent (omo) 周辺環境のツール、設定パス、sandbox などに依存するスキルです。OpenCode / Senpi (omo-native) での利用を想定できますが、Senpi との完全互換を示す分類ではありません。
-  - `create-skill`: 現在の本文は OpenCode の Oracle / `task()` API と設定ディレクトリ検出に依存します。Senpi で使うにはツール呼び出しとパスの調整が必要です。
-  - `git-commit`: コミット手順は汎用ですが、GUIDE.md を `~/.config/opencode/skill/git-commit/` の固定パスから読み込み、omo の `git-master` スキルとの併用を前提としています。omo-native にも `git-master` はありますが、Senpi では GUIDE の参照パスを調整する必要があります。
-  - `sandbox-extra`: 手順は OpenCode / Senpi の bwrap sandbox に対応していますが、GUIDE.md の参照先は `~/.config/opencode/skill/sandbox-extra/` に固定されています。Senpi で使うには参照パスを調整する必要があります。
+- **omo**: oh-my-openagent (omo) 周辺環境で使うスキルです。OpenCode / Senpi (OMO Native) の公開ツールと実際の設定に合わせて動作します。分類自体は、個々の runtime でのロードや実行を保証するものではありません。
+  - `create-skill`: 実行中の harness の設定から配置先を決め、利用可能なレビュー役と task API を使います。Native に Oracle や OpenCode と同じ API があるとは仮定しません。
+  - `git-commit`: ロードされた SKILL.md と同じディレクトリの GUIDE.md を読み込みます。`git-master` は利用可能で、広い Git 操作に必要な場合に併用します。
+  - `sandbox-extra`: ロードされた SKILL.md と同じディレクトリの GUIDE.md を読み込み、OpenCode / Senpi の `sandbox-extra.sh` を扱います。この設定を読み込む bwrap wrapper が前提です。
 - **generic**: 特定のエージェント環境に依存せず、他環境でも流用可能なスキルです。
   - `missing-tools`: nix / direnv 環境が前提となるだけで、特定のエージェントには依存しません。
   - `worktree-pr`: Git とホスティングの CLI / API を使い、`.worktrees` 内での作業から PR 作成、許可後のマージと後片付けまで進めます。特定のエージェントや追加スキルには依存しません。

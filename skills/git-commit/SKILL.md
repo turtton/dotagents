@@ -1,16 +1,17 @@
-______________________________________________________________________
-
-## name: git-commit description: "Git commit workflow skill. MUST USE when creating any git commits. Reads GUIDE.md for structured commit procedure. Complements git-master (general git ops) by focusing on commit composition, staging discipline, and message quality. Triggers: 'commit', 'create commit', 'git commit', 'make a commit', 'commit these changes', 'stage and commit', 'git add and commit'."
+---
+name: git-commit
+description: "Git commit workflow skill. MUST USE when creating any git commits. Reads GUIDE.md for structured commit procedure. Complements git-master (general git ops), when available, by focusing on commit composition, staging discipline, and message quality. Triggers: 'commit', 'create commit', 'git commit', 'make a commit', 'commit these changes', 'stage and commit', 'git add and commit'."
+---
 
 # Git Commit Workflow
 
 This skill defines the commit creation workflow. The full procedure is in a separate file.
 
-**IMPORTANT**: Before proceeding, read the full guide using the Read tool:
-
-```
-Read file: ~/.config/opencode/skill/git-commit/GUIDE.md
-```
+**IMPORTANT**: Before proceeding, read the full [GUIDE.md](GUIDE.md) using an
+available file-reading tool. Resolve this link relative to the loaded `SKILL.md`,
+not the working directory. If its location is unclear, check the absolute skill
+path supplied by the loader. If it remains unknown, explain that the guide cannot
+be located; do not guess a path belonging to another harness.
 
 Then follow the procedure described in GUIDE.md exactly.
 
@@ -27,4 +28,5 @@ Then follow the procedure described in GUIDE.md exactly.
 
 - **git-master**: General git operations (rebase, squash, history search, blame, bisect)
 - **git-commit** (this skill): Commit-specific workflow — staging, message drafting, hook handling, verification
-- Use both together: git-master for broader git work, this skill for the commit step
+- When git-master is available and broader git work requires it, use it alongside
+  this skill. Creating a commit alone does not require loading git-master.
